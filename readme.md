@@ -35,7 +35,7 @@ def generate_snow(
 - frames is the number of frames to produce
 - color is the rgba color tuple to set the droplet particles to
 - background is the rgba color tuple to set the background to
-- the wrap_*_shift arguments specify if the area introduced after the move of the array should be filled with a wrapped copy of the overwritten data or a different value
+- the wrap_*_shift arguments specify if the area introduced after the move of the array should be filled with a wrapped copy of the overwritten data or the background value
 - \*_drift is the number of row / column shifts to attempt each frame advance
 - \*_drift_radius is the max number of pixels a particle can move in that dimension each frame advance
 - \*wrap_*_drift argumewnts specify if random drift should cause particles to wrap in that direction
