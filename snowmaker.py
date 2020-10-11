@@ -240,7 +240,7 @@ if __name__ == "__main__":
 	height = int(args.height) if args.height else 500
 	foreground = hex_to_rgba(args.foreground) if args.foreground else (255,255,255,255)
 	background = hex_to_rgba(args.background) if args.background else (0,0,0,0)
-	dxvelocity = int(args.xvelocity) if args.xvelocity else 0
+	xvelocity = int(args.xvelocity) if args.xvelocity else 0
 	yvelocity = int(args.yvelocity) if args.yvelocity else -1
 	scale = int(args.scale) if args.scale else 1
 	rate = int(args.rate) if args.rate else 10
