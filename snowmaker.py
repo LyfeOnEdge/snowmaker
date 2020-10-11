@@ -30,9 +30,12 @@ class Canvas:
 	def load_array(self, array):
 		self.array, self.width, self.height = array, len(array[0]), len(array)
 
-	def export_array(self): return copy(self.array)
-	def export_image(self): return Image.fromarray(self.array).convert("RGBA")
-	def export_tk_image(self): return ImageTk(self.export_image())
+	def export_array(self):
+		return copy(self.array)
+	def export_image(self):
+		return Image.fromarray(self.array).convert("RGBA")
+	def export_tk_image(self):
+		return ImageTk(self.export_image())
 	
 	def get_pixel_color(self, id):
 		x, y = self.split_id(id)
@@ -177,15 +180,17 @@ def generate_snow(
 	assert h_drift_radius >= 0 and type(h_drift_radius) is int, "h_drift_radius must be a postive integer or 0"
 	assert type(v_drift) is int, "v_drift must be an integer"
 	assert v_drift_radius >= 0 and type(v_drift_radius) is int, "v_drift_radius must be a postive integer or 0"
-	frame_list = []
 	canvas = Canvas(width, height, background)
 	array = canvas.array
+	frame_list = []
+	
 	def generate_frame(img):
-		return img
 		"""
 		Abstract here to return an image in numpy array format 
 		Can be used to draw images like raindrops or snow etc from the points on the array.
 		"""
+		return img
+	
 	def advance_frame(add = True): #Steps a frame in the animation, when true adds a frame to the list
 		#Generate image from array and get its pallet space
 		if h_drift: #Make snow randomly drift back and forth
