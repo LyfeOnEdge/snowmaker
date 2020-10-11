@@ -15,15 +15,20 @@ class Canvas:
 		assert height > 0 and type(height) is int, "Canvas height must be a postive integer"
 		self.width, self.height = width, height
 		self.array = full((height, width, 4), color, dtype = uint8) #Depth of 4 for rgba
+	
 	def format_id_pair(self, ida, idb):
 		x0, y0 = split_id(ida)
 		x1, y1 =  split_id(idb)
 		return (min(x0, x1), min(y0, y1), max(x0, x1), max(y0, y1))
-	def load_bytes(self, bytestring): self.load_image(Image.open(io.BytesIO(bytestring)))
+	
+	def load_bytes(self, bytestring):
+		self.load_image(Image.open(io.BytesIO(bytestring)))
 	def load_image_from_file(self, imagepath):
 		with open(imagepath, "rb") as f: self.load_image(f.read())
-	def load_image(self, image): self.array, self.width, self.height = asarray(image), image.size[0], image.size[1]
-	def load_array(self, array): self.array, self.width, self.height = array, len(array[0]), len(array)
+	def load_image(self, image):
+		self.array, self.width, self.height = asarray(image), image.size[0], image.size[1]
+	def load_array(self, array):
+		self.array, self.width, self.height = array, len(array[0]), len(array)
 
 	def export_array(self): return copy(self.array)
 	def export_image(self): return Image.fromarray(self.array).convert("RGBA")
@@ -33,25 +38,37 @@ class Canvas:
 		x, y = self.split_id(id)
 		color = self.array[y][x]
 		return color
-	def set_pixel_color_id(self, id, color): self.set_pixel_color(self.split_id(id), color)
-	def set_pixel_color(self, coords, color): x,y = coords; self.array[y][x] = color
+	def set_pixel_color_id(self, id, color):
+		self.set_pixel_color(self.split_id(id), color)
+	def set_pixel_color(self, coords, color):
+		x,y = coords
+		self.array[y][x] = color
 	
-	def draw_column_id(self, id, color): self.draw_row(split_id(id)[0])
-	def draw_column(self, x, color): self.array[:, x] = color
+	def draw_column_id(self, id, color):
+		self.draw_row(split_id(id)[0])
+	def draw_column(self, x, color):
+		self.array[:, x] = color
 	
-	def draw_row_id(self, id, color): self.draw_row(split_id(id)[1])
-	def draw_row(self, y, color): self.array[y, :] = color
+	def draw_row_id(self, id, color):
+		self.draw_row(split_id(id)[1])
+	def draw_row(self, y, color):
+		self.array[y, :] = color
 	
-	def draw_rectangle_id(self, ida, idb, color): self.draw_rectangle(format_id_pair(ida, idb), color)
+	def draw_rectangle_id(self, ida, idb, color):
+		self.draw_rectangle(format_id_pair(ida, idb), color)
 	def draw_rectangle(self, coords, color):
 		x0, y0, x1, y1 = coords
 		self.array[y0:y1+1, x0:x1+1] = full((y1-y0+1, x1-x0+1,4), color, dtype = uint8)
 	
-	def fill_canvas(self, color): self.array = full((self.height, self.width, 4), color, dtype = uint8)
+	def fill_canvas(self, color):
+		self.array = full((self.height, self.width, 4), color, dtype = uint8)
 	
-	def paste_image(self, image, *args, **kwargs): self.paste_image_from_array(asarray(image), *args, **kwargs)
-	def paste_image_from_file(self, imagepath, *args, **kwargs): self.paste_image(Image.open(imagepath), *args, **kwargs)
-	def paste_image_from_bytes(self, bytestring, *args, **kwargs): self.paste_image(Image.open(io.BytesIO(bytestring)))
+	def paste_image(self, image, *args, **kwargs):
+		self.paste_image_from_array(asarray(image), *args, **kwargs)
+	def paste_image_from_file(self, imagepath, *args, **kwargs):
+		self.paste_image(Image.open(imagepath), *args, **kwargs)
+	def paste_image_from_bytes(self, bytestring, *args, **kwargs):
+		self.paste_image(Image.open(io.BytesIO(bytestring)))
 	def paste_image_from_array(self, in_array, coords = (0, 0), pastesize = (None, None)):
 		x0, y0 = coords #Where in main array to paste
 		# if x0 < 0 or y0 < 0 or not type(x0) is int or not type(y0) is int: raise ValueError(f"Paste coordinates must be postive integers, X - {0}, Y - {0}")
@@ -113,7 +130,8 @@ def shift_column_down(array, column, delta, wrap = False, background = (0,0,0,0)
 	array[delta:, column] = array[:-delta, column]
 	if wrap: array[:delta, column] = cpy
 	else: array[:delta, column] = full((delta, len(array[0][0])), background, dtype = uint8)
-def rescale_array_by_width(array, scale): return repeat(repeat(array, scale, axis=0), scale, axis=1)
+def rescale_array_by_width(array, scale):
+	return repeat(repeat(array, scale, axis=0), scale, axis=1)
 
 #Vector is a tuple of two ints like (0,-1) [which would make the particles move south]
 #Scale is an integer to scale the output frames by
@@ -172,19 +190,32 @@ def generate_snow(
 		#Generate image from array and get its pallet space
 		if h_drift: #Make snow randomly drift back and forth
 			for _ in range(rdm.randrange(0,h_drift)):
-				shift_row_right(array, rdm.randrange(height), rdm.randrange(1, 4), background = background, wrap = wrap_h_drift)
-				shift_row_left(array, rdm.randrange(height), rdm.randrange(1, 4), background = background, wrap = wrap_h_drift)
+				shift_row_right(array, rdm.randrange(height), rdm.randrange(1, 4),
+					background = background, wrap = wrap_h_drift)
+				shift_row_left(array, rdm.randrange(height), rdm.randrange(1, 4),
+					background = background, wrap = wrap_h_drift)
 		if v_drift: #Make snow randomly drift up and down
 			for _ in range(rdm.randrange(0,int(v_drift))): 
-				shift_column_up(array, rdm.randrange(width), rdm.randrange(1, 4), background = background, wrap = wrap_v_drift)
-				shift_column_down(array, rdm.randrange(width), rdm.randrange(1, 4),background = background, wrap = wrap_v_drift)
+				shift_column_up(array, rdm.randrange(width), rdm.randrange(1, 4),
+					background = background, wrap = wrap_v_drift)
+				shift_column_down(array, rdm.randrange(width), rdm.randrange(1, 4),
+					background = background, wrap = wrap_v_drift)
 		# #Spawn Drops
-		for _ in range(rdm.randrange(0, 2*rate)): canvas.array[0][rdm.randrange(width)] = color #(rdm.randrange(255), rdm.randrange(255), rdm.randrange(255), rdm.randrange(255))
+		for _ in range(rdm.randrange(0, 2*rate)):
+			canvas.array[0][rdm.randrange(width)] = color #(rdm.randrange(255), rdm.randrange(255), rdm.randrange(255), rdm.randrange(255))
 		#Apply vector
-		if h_shift < 0: shift_array_left(array, abs(h_shift), background = background, wrap = wrap_left_shift)
-		elif h_shift > 0: shift_array_right(array, abs(h_shift), background = background, wrap = wrap_right_shift)
-		if v_shift < 0: shift_array_down(array, abs(v_shift), background = background, wrap = wrap_down_shift)
-		elif v_shift > 0: shift_array_up(array, abs(v_shift), background = background, wrap = wrap_up_shift)
+		if h_shift < 0:
+			shift_array_left(array, abs(h_shift),
+				background = background, wrap = wrap_left_shift)
+		elif h_shift > 0:
+			shift_array_right(array, abs(h_shift),
+				background = background, wrap = wrap_right_shift)
+		if v_shift < 0:
+			shift_array_down(array, abs(v_shift),
+				background = background, wrap = wrap_down_shift)
+		elif v_shift > 0:
+			shift_array_up(array, abs(v_shift),
+				background = background, wrap = wrap_up_shift)
 		if add: #Export array, rescale it, convert to pil image, apply effects, and append to framelist
 			img = canvas.export_array()
 			if scale > 1: img = rescale_array_by_width(img, scale)
