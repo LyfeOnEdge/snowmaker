@@ -190,15 +190,15 @@ def generate_snow(
 		#Generate image from array and get its pallet space
 		if h_drift: #Make snow randomly drift back and forth
 			for _ in range(rdm.randrange(0,h_drift)):
-				shift_row_right(array, rdm.randrange(height), rdm.randrange(1, 4),
+				shift_row_right(array, rdm.randrange(height), rdm.randrange(1, h_drift_radius),
 					background = background, wrap = wrap_h_drift)
-				shift_row_left(array, rdm.randrange(height), rdm.randrange(1, 4),
+				shift_row_left(array, rdm.randrange(height), rdm.randrange(1, h_drift_radius),
 					background = background, wrap = wrap_h_drift)
 		if v_drift: #Make snow randomly drift up and down
 			for _ in range(rdm.randrange(0,int(v_drift))): 
-				shift_column_up(array, rdm.randrange(width), rdm.randrange(1, 4),
+				shift_column_up(array, rdm.randrange(width), rdm.randrange(1, v_drift_radius),
 					background = background, wrap = wrap_v_drift)
-				shift_column_down(array, rdm.randrange(width), rdm.randrange(1, 4),
+				shift_column_down(array, rdm.randrange(width), rdm.randrange(1, v_drift_radius),
 					background = background, wrap = wrap_v_drift)
 		# #Spawn Drops
 		for _ in range(rdm.randrange(0, 2*rate)):
