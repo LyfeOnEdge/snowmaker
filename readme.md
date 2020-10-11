@@ -92,6 +92,6 @@ optional arguments:
                         Wrap particles on vertical drift
 ```
 
-For example `python snowmaker.py snowmaker.gif -fg #7F7F7FFF --width 100 --height 200 -f 300 -s 2 -r 1 -x "1" -y "-1" -wr -whd -wvd` would create a 400x600 gif at snowmaker.gif with the grey particles on a transparent background shifting down and to the right 1 pixel each frame and wrapping to the right. Wrap horizontal (-whd) and vertical (-wvd) on drift helps to prevent noticible blank areas when an area has shifted.
+For example `python snowmaker.py snowmaker.gif -fg #7F7F7FFF --width 300 --height 200 -f 300 -s 2 -r 1 -x "1" -y "-1" -wr -whd -wvd` would create a 600x300 gif at snowmaker.gif with the grey particles on a transparent background shifting down and to the right 1 pixel each frame and wrapping to the right. Wrap horizontal (-whd) and vertical (-wvd) on drift helps to prevent noticible blank areas when an area has shifted.
 
 [![Snowmaker GIF](https://raw.githubusercontent.com/LyfeOnEdge/snowmaker/main/snowmaker.gif)]()
