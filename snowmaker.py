@@ -202,7 +202,7 @@ def generate_snow(
 					background = background, wrap = wrap_v_drift)
 		# #Spawn Drops
 		for _ in range(rdm.randrange(0, 2*rate)):
-			canvas.array[0][rdm.randrange(width)] = color #(rdm.randrange(255), rdm.randrange(255), rdm.randrange(255), rdm.randrange(255))
+			canvas.array[0][rdm.randrange(width)] = color
 		#Apply vector
 		if h_shift < 0:
 			shift_array_left(array, abs(h_shift),
