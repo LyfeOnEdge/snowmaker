@@ -1,5 +1,5 @@
 # Snowmaker PY
-[![Snowmaker PY](https://github.com/LyfeOnEdge/snowmaker/blob/master/console.png?raw=true)]()
+[![Snowmaker PY](https://raw.githubusercontent.com/LyfeOnEdge/snowmaker/main/console.png)]()
 
 Snowmaker is a tool for generating snow animations in python for use in gifs / games.
 
@@ -92,6 +92,6 @@ optional arguments:
                         Wrap particles on vertical drift
 ```
 
-For example `python snowmaker.py snowmaker.gif --width 100 --height 200 -f 300 -s 2 -r 1 -x "1" -y "-1" -wr -whd -wvd` would create a 200x400 gif at snowmaker.gif with the particles shift down and to the right 1 pixel each frame and wrapping to the right. Wrap horizontal (-whd) and vertical (-wvd) on drift helps to prevent noticible blank areas when an area has shifted.
+For example `python snowmaker.py snowmaker.gif --width 100 --height 200 -f 300 -s 2 -r 1 -x "1" -y "-1" -wr -whd -wvd` would create a 400x600 gif at snowmaker.gif with the particles shift down and to the right 1 pixel each frame and wrapping to the right. Wrap horizontal (-whd) and vertical (-wvd) on drift helps to prevent noticible blank areas when an area has shifted.
 
-[![Snowmaker GIF](https://github.com/LyfeOnEdge/snowmaker/blob/master/snowmaker.gif?raw=true)]()
+[![Snowmaker GIF](https://raw.githubusercontent.com/LyfeOnEdge/snowmaker/main/snowmaker.gif)]()
