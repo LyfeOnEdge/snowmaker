@@ -38,7 +38,7 @@ def generate_snow(
 - the wrap_*_shift arguments specify if the area introduced after the move of the array should be filled with a wrapped copy of the overwritten data or the background value
 - \*_drift is the number of row / column shifts to attempt each frame advance
 - \*_drift_radius is the max number of pixels a particle can move in that dimension each frame advance
-- \*wrap_*_drift argumewnts specify if random drift should cause particles to wrap in that direction
+- \*wrap_*_drift arguments specify if random drift should cause particles to wrap in that direction
 
 
 
@@ -92,6 +92,6 @@ optional arguments:
                         Wrap particles on vertical drift
 ```
 
-For example `python snowmaker.py snowmaker.gif -fg #7F7F7FFF --width 300 --height 200 -f 300 -s 2 -r 1 -x "1" -y "-1" -wr -whd -wvd` would create a 600x300 gif at snowmaker.gif with the grey particles on a transparent background shifting down and to the right 1 pixel each frame and wrapping to the right. Wrap horizontal (-whd) and vertical (-wvd) on drift helps to prevent noticible blank areas when an area has shifted.
+For example `python snowmaker.py snowmaker.gif -fg #7F7F7FFF --width 300 --height 200 -f 300 -s 2 -r 1 -x "1" -y "-1" -wr -whd -wvd` would create a 600x400 gif at snowmaker.gif with the grey particles on a transparent background shifting down and to the right 1 pixel each frame and wrapping to the right. Wrap horizontal (-whd) and vertical (-wvd) on drift helps to prevent noticible blank areas when an area has shifted.
 
 [![Snowmaker GIF](https://raw.githubusercontent.com/LyfeOnEdge/snowmaker/main/snowmaker.gif)]()
